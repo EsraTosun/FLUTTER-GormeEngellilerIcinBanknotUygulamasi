@@ -69,8 +69,18 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/ses_kaydi/
-    - assets/Para/iphone_dort_uc/
-    - assets/Para/iphone_onalti_dokuz/
+    - assets/Para/5TL/ON/
+    - assets/Para/5TL/ARKA/
+    - assets/Para/10TL/ON/
+    - assets/Para/10TL/ARKA/
+    - assets/Para/20TL/ON/
+    - assets/Para/20TL/ARKA/
+    - assets/Para/50TL/ON/
+    - assets/Para/50TL/ARKA/
+    - assets/Para/100TL/ON/
+    - assets/Para/100TL/ARKA/
+    - assets/Para/200TL/ON/
+    - assets/Para/200TL/ARKA/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
