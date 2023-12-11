@@ -28,7 +28,7 @@ class knnClass {
     distances.add([HangiPara,dist]);
 
     // test_row öklidi ve tren verilerini karşılaştırırken sıralama
-    var sorted_distance = sortDistanceList(distances);
+    var sorted_distance =  (distances);
 
     return sorted_distance;
   }

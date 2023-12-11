@@ -63,19 +63,15 @@ class _ColorPickerWidgetState extends  State<ColorPickerWidgetStateHistogram>{
 
 void ParaDegeri(String imagePath) async{
 
-
-  int dosyaAdi = await dosyaAdiBulma("assets/Para/deneme/iphonedortuc.jpg", 0);
-  //int dosyaAdi = 123;
-  //String dosyaAdi ="serif";
-  //int dosyaAdi = 3048192;
+  await Histogram.CekilenGoruntununHistogram(imagePath,1);
   var list = [];
 
-  list.add([5,await Histogram.compareImages("assets/Para/$dosyaAdi/5TL.jpg", "assets/Para/deneme/deneme.jpg")]);
-  list.add([10,await Histogram.compareImages("assets/Para/$dosyaAdi/10TL.jpg", "assets/Para/deneme/deneme.jpg")]);
-  list.add([20,await Histogram.compareImages("assets/Para/$dosyaAdi/20TL.jpg", "assets/Para/deneme/deneme.jpg")]);
-  list.add([50,await Histogram.compareImages("assets/Para/$dosyaAdi/50TL.jpg", "assets/Para/deneme/deneme.jpg")]);
-  list.add([100,await Histogram.compareImages("assets/Para/$dosyaAdi/100TL.jpg", "assets/Para/deneme/deneme.jpg")]);
-  list.add([200,await Histogram.compareImages("assets/Para/$dosyaAdi/200TL.jpg", "assets/Para/deneme/deneme.jpg")]);
+  list.add([5,await Histogram.compareImages("assets/Para/5TL.jpg", "assets/Para/deneme/deneme.jpg")]);
+  list.add([10,await Histogram.compareImages("assets/Para/10TL.jpg", "assets/Para/deneme/deneme.jpg")]);
+  list.add([20,await Histogram.compareImages("assets/Para/20TL.jpg", "assets/Para/deneme/deneme.jpg")]);
+  list.add([50,await Histogram.compareImages("assets/Para/50TL.jpg", "assets/Para/deneme/deneme.jpg")]);
+  list.add([100,await Histogram.compareImages("assets/Para/100TL.jpg", "assets/Para/deneme/deneme.jpg")]);
+  list.add([200,await Histogram.compareImages("assets/Para/200TL.jpg", "assets/Para/deneme/deneme.jpg")]);
 
   // Düşük değerler daha yüksek benzerliği gösterirken, yüksek değerler daha büyük farklılığı gösterir.
 
@@ -89,32 +85,6 @@ void ParaDegeri(String imagePath) async{
   AudioPlayersClass.PARA=list[0][0];
 }
 
-Future<int> dosyaAdiBulma(String imagePath,int deger) async {
-  Uint32List rgbaPixels = await Histogram.pixelHesaplama(imagePath, deger,1);
-  print("Şu anki fotoğraf pixel => ${rgbaPixels.length}");
-  int dosyaAdi = findClosestNumber(rgbaPixels.length);
-  print("dosya adi => ${dosyaAdi}");
-  return dosyaAdi;
-}
-
-int findClosestNumber(int target) {
-  List<int> numbers = [1920000,3048192,3145728,7990272,786432,1152000,1926400,2359296,12110400];
-
-  int closestNumber = numbers.first; // İlk sayıyı varsayılan olarak en yakın kabul ediyoruz
-  int minDifference = (target - closestNumber).abs(); // İlk farkı hesaplıyoruz
-
-  for (int number in numbers) {
-    int difference = (target - number).abs(); // Sayı ile hedef arasındaki farkı hesaplıyoruz
-    print(difference);
-    if (difference < minDifference) {
-      // Eğer bu fark daha önce hesaplanan en küçük farktan daha küçükse
-      minDifference = difference; // Yeni en küçük farkı güncelliyoruz
-      closestNumber = number; // Yeni en yakın sayıyı güncelliyoruz
-    }
-  }
-
-  return closestNumber;
-}
 
 List sortDistanceList(List distance) {
   // listenin iki öğesini karşılaştırırken sıralar
