@@ -7,6 +7,7 @@ import 'dart:typed_data';
 
 import 'package:tubitak_projesi/AudioplayersClass.dart';
 import 'package:tubitak_projesi/Histogram.dart';
+import 'package:tubitak_projesi/KNNAlgorithm.dart';
 
 
 
@@ -63,26 +64,90 @@ class _ColorPickerWidgetState extends  State<ColorPickerWidgetStateHistogram>{
 
 void ParaDegeri(String imagePath) async{
 
-  await Histogram.CekilenGoruntununHistogram(imagePath,1);
+  //Çekilen görüntünün yolu farklı olduğu için bu şekilde yaptım
+  List<int> cekilenGoruntununHistogram = await Histogram.calculateHistogram(imagePath,1);
   var list = [];
 
-  list.add([5,await Histogram.compareImages("assets/Para/5TL.jpg", "assets/Para/deneme/deneme.jpg")]);
-  list.add([10,await Histogram.compareImages("assets/Para/10TL.jpg", "assets/Para/deneme/deneme.jpg")]);
-  list.add([20,await Histogram.compareImages("assets/Para/20TL.jpg", "assets/Para/deneme/deneme.jpg")]);
-  list.add([50,await Histogram.compareImages("assets/Para/50TL.jpg", "assets/Para/deneme/deneme.jpg")]);
-  list.add([100,await Histogram.compareImages("assets/Para/100TL.jpg", "assets/Para/deneme/deneme.jpg")]);
-  list.add([200,await Histogram.compareImages("assets/Para/200TL.jpg", "assets/Para/deneme/deneme.jpg")]);
+  // 5 TL İÇİN
+  for(int i=1; i<75;i++)
+  {
+    list.add([5,await Histogram.compareImages("assets/Para/5TL/ON/"+i.toString()+".jpg")]);
+  }
+  for(int i=1; i<75;i++)
+  {
+    list.add([5,await Histogram.compareImages("assets/Para/5TL/ARKA/"+i.toString()+".jpg")]);
+  }
+
+  // 10 TL İÇİN
+  for(int i=1; i<75;i++)
+  {
+    list.add([10,await Histogram.compareImages("assets/Para/10TL/ON/"+i.toString()+".jpg")]);
+  }
+  for(int i=1; i<75;i++)
+  {
+    list.add([10,await Histogram.compareImages("assets/Para/10TL/ARKA/"+i.toString()+".jpg")]);
+  }
+
+  // 20 TL İÇİN
+  for(int i=1; i<75;i++)
+  {
+    list.add([20,await Histogram.compareImages("assets/Para/20TL/ON/"+i.toString()+".jpg")]);
+  }
+  for(int i=1; i<75;i++)
+  {
+    list.add([20,await Histogram.compareImages("assets/Para/20TL/ARKA/"+i.toString()+".jpg")]);
+  }
+
+  // 50 TL İÇİN
+  for(int i=1; i<75;i++)
+  {
+    list.add([50,await Histogram.compareImages("assets/Para/50TL/ON/"+i.toString()+".jpg")]);
+  }
+  for(int i=1; i<75;i++)
+  {
+    list.add([50,await Histogram.compareImages("assets/Para/50TL/ARKA/"+i.toString()+".jpg")]);
+  }
+
+  // 100 TL İÇİN
+  for(int i=1; i<75;i++)
+  {
+    list.add([100,await Histogram.compareImages("assets/Para/100TL/ON/"+i.toString()+".jpg")]);
+  }
+  for(int i=1; i<75;i++)
+  {
+    list.add([100,await Histogram.compareImages("assets/Para/100TL/ARKA/"+i.toString()+".jpg")]);
+  }
+
+  // 200 TL İÇİN
+  for(int i=1; i<75;i++)
+  {
+    list.add([200,await Histogram.compareImages("assets/Para/200TL/ON/"+i.toString()+".jpg")]);
+  }
+  for(int i=1; i<75;i++)
+  {
+    list.add([200,await Histogram.compareImages("assets/Para/200TL/ARKA/"+i.toString()+".jpg")]);
+  }
+
+  List<dynamic> sonucList = KNNAlgorithm.knn(cekilenGoruntununHistogram, list);
+
+  print(sonucList.length);
+  AudioPlayersClass.PARA=sonucList[0][0];
+
+  for(int i =0;i<sonucList.length;i++)
+  {
+    print("${sonucList[i][0]} => ${sonucList[i][1]}");
+  }
 
   // Düşük değerler daha yüksek benzerliği gösterirken, yüksek değerler daha büyük farklılığı gösterir.
 
-  for(int i = 0; i< list.length; i++){
+  /*for(int i = 0; i< list.length; i++){
     print("${list[i][0]} => ${list[i][1]}");
     if (list[i][1] == double.infinity){
       return list[i][0];
     }
-  }
-  sortDistanceList(list);
-  AudioPlayersClass.PARA=list[0][0];
+  }   */
+  //sortDistanceList(list);
+  //AudioPlayersClass.PARA=list[0][0];
 }
 
 
