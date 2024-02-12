@@ -1,5 +1,10 @@
 import 'dart:math';
 
+/*
+K-Nearest Neighbors (KNN) algoritması, bir veri noktasının sınıfını veya değerini tahmin etmek için,
+ona en yakın komşularının sınıflarını veya değerlerini kullanarak çalışan bir makine öğrenimi algoritmasıdır.
+*/
+
 class KNNAlgorithm {
   static double euclideanDistance(List<int> histogram1, List<int> histogram2) {
     double distance = 0.0;

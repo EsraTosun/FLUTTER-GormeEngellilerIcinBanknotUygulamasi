@@ -104,61 +104,7 @@ class Histogram {
     img.adjustColor(image!, brightness: 1.5, contrast: 1.5);
     resizedImage = img.sobel(image!); // Kenar algılama
 
-    /* // Kenar algılama sonucunda oluşan görüntünün sınırlarını belirleyin
-    int left = 0;
-    int top = 0;
-    int right = resizedImage.width - 1;
-    int bottom = resizedImage.height - 1;
 
-    print("Left: $left, Right: $right, Top: $top, Bottom: $bottom");
-
-
-    // Kenar algılama sonucunda görüntüdeki kenarları tespit edin ve sınırları belirleyin
-    // Siyah beyaz görüntü üzerinde beyaz pikselleri tespit ederek sınırları belirleyin
-    for (int x = 0; x < resizedImage.width; x++) {
-      for (int y = 0; y < resizedImage.height; y++) {
-        img.Color pixel = resizedImage.getPixel(x, y);
-        //print("Pixel at ($x, $y): $pixel");
-
-        // Renk kontrolü için getColor kullanılabilir.
-        if (pixel.g == 0 && pixel.r == 0 && pixel.b == 0) {
-          print("Pixel at ($x, $y): $pixel");
-          if (x < left) {
-            left = x;
-          }
-          if (x > right) {
-            right = x;
-          }
-          if (y < top) {
-            top = y;
-          }
-          if (y > bottom) {
-            bottom = y;
-          }
-        }
-      }
-    }
-
-    print("Left: $left, Right: $right, Top: $top, Bottom: $bottom");
-
-    // Kenar algılama sonucundaki sınırları kullanarak görüntüyü kırpın
-    img.Image croppedImage = img.copyCrop(
-      resizedImage,
-      x: left,
-      y: top,
-      width: right - left,
-      height: bottom - top,
-    );  */
-
-    // Kırpılmış görüntüyü kaydedin
-    //File('cropped_image.jpg').writeAsBytesSync(img.encodeJpg(croppedImage));
-
-    //resizedImage = img.grayscale(image!);
-    // Görüntüyü yeniden boyutlandırma
-    //resizedImage = img.copyResize(image, width: 200, height: 200);
-
-    //print(croppedImage.width);
-    //print(croppedImage.height);
     i++;
     Uint8List uint8list = img.encodePng(resizedImage); // Örnek bir dönüşüm, burada PNG formatı kullanıldı
     imagePath = await saveEnhancedImage(uint8list, i);
