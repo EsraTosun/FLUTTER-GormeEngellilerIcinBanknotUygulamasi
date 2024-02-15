@@ -1,10 +1,5 @@
 import 'dart:math';
 
-/*
-K-Nearest Neighbors (KNN) algoritması, bir veri noktasının sınıfını veya değerini tahmin etmek için,
-ona en yakın komşularının sınıflarını veya değerlerini kullanarak çalışan bir makine öğrenimi algoritmasıdır.
-*/
-
 class KNNAlgorithm {
   static double euclideanDistance(List<int> histogram1, List<int> histogram2) {
     double distance = 0.0;
@@ -19,21 +14,21 @@ class KNNAlgorithm {
     return distance;
   }
 
-  static List<dynamic> getNeighbors(List<int> newHistogram, List<dynamic> allHistograms) {
+  static List<dynamic> getNeighbors(List<int> newHistogram, List<dynamic> allHistograms, int k) {
     List<dynamic> distances = [];
 
     for (int i = 0; i < allHistograms.length; i++) {
       List<dynamic> histogramInfo = allHistograms[i];
-      var dist = euclideanDistance(newHistogram, histogramInfo[1]);  // Histogram değerleri, sınıf etiketini çıkardık
-      distances.add([histogramInfo[0], dist]);  // [Sınıf etiketi, Uzaklık]
+      var dist = euclideanDistance(newHistogram, histogramInfo[1]);
+      distances.add([histogramInfo[0], dist]);
     }
 
     var sortedDistance = sortDistanceList(distances);
-    return sortedDistance;
+    return sortedDistance.sublist(0, k);  // Sıralı mesafelerden ilk k tanesini al
   }
 
-  static dynamic knn(List<int> newHistogram, List<dynamic> allHistograms) {
-    List<dynamic> sortedDistance = getNeighbors(newHistogram, allHistograms);
+  static dynamic knn(List<int> newHistogram, List<dynamic> allHistograms, int k) {
+    List<dynamic> sortedDistance = getNeighbors(newHistogram, allHistograms, k);
     return sortedDistance;
   }
 }

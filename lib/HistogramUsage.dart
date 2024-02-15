@@ -128,7 +128,7 @@ void ParaDegeri(String imagePath) async{
     list.add([200,await Histogram.compareImages("assets/Para/200TL/ARKA/"+i.toString()+".jpg")]);
   }
 
-  List<dynamic> sonucList = KNNAlgorithm.knn(cekilenGoruntununHistogram, list);
+  List<dynamic> sonucList = KNNAlgorithm.knn(cekilenGoruntununHistogram, list ,50);
 
   print(sonucList.length);
   AudioPlayersClass.PARA=sonucList[0][0];
